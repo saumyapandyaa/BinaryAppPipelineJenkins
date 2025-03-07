@@ -1,9 +1,17 @@
 pipeline {
   agent any
+  environment {
+        PROJECT = credentials('project_id')
+    }
   tools {
     maven 'maven' 
   }
   stages {
+    stage('Test Credentials') {
+        steps {
+            sh 'echo "PROJECT ID: ${PROJECT}"'  // Should print project_id if correct
+        }
+    }
     stage ('Init') {
       steps {
         sh 'echo "Start of Job"'
